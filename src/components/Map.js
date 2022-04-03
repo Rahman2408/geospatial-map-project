@@ -4,6 +4,7 @@ import "../App.css";
 import Mapbox from "./MapboxLayerApi";
 import mapData from "../data/mapData.json"
 import "leaflet/dist/leaflet.css"
+import ToggleView from "./ToggleView";
 
 
 export default class Map extends Component {
@@ -16,6 +17,11 @@ componentDidMount() {
     return (
       <>
       <h1 style={{textAlign: "center"}}>Reserved space for content above the map.</h1>
+        
+        <React.Fragment>
+          <ToggleView label="Sattelite View" />
+        </React.Fragment>
+
       <MapContainer center={[25.7617, -80.1918]} zoom={8}>
 
           <TileLayer 
