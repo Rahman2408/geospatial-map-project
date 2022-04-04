@@ -1,26 +1,57 @@
-import React, { Component } from "react";
-import { MapContainer, TileLayer, Marker, Popup,GeoJSON } from "react-leaflet";
+import React from "react";
+import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
 import "../App.css";
 import Mapbox from "./MapboxLayerApi";
 import mapData from "../data/mapData.json"
 import "leaflet/dist/leaflet.css"
-import ToggleView from "./ToggleView";
+import { FormControlLabel, Switch } from "@material-ui/core";
 
 
-export default class Map extends Component {
-  
-componentDidMount() {
-  console.log(mapData.features)
-}
+const Map =() => {
 
-  render() {
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     satView: false,
+  //     mapView: Mapbox.id.street
+  //   }
+  // }
+
+
+
+// handleViewChange = () => {
+//   this.setState({ mapView: Mapbox.id.satellite})
+// }
+  // Our States
+  const [state, setState] = React.useState({ status: true });
+
+  // Change State Function
+  const handleChange = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
+
     return (
       <>
       <h1 style={{textAlign: "center"}}>Reserved space for content above the map.</h1>
         
-        <React.Fragment>
+        <div className="toggleView">
+          <FormControlLabel
+            control={
+              <Switch
+                checked= {state.status}
+                // onClick= {() => this.setState({satView: true, mapView: Mapbox.id.satellite})}
+                onChange= {state.handleChange}
+                color= "primary"
+                name="toggleView"
+                />
+              }
+              label="Sattelite View"
+          />
+        </div>
+
+        {/* <React.Fragment>
           <ToggleView label="Sattelite View" />
-        </React.Fragment>
+        </React.Fragment> */}
 
       <MapContainer center={[25.7617, -80.1918]} zoom={8}>
 
@@ -44,5 +75,5 @@ componentDidMount() {
       </MapContainer>
       </>
     )
-  }
-}
+      }
+export default Map;
